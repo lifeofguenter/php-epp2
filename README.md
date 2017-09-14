@@ -42,7 +42,7 @@ Features
 --------
 
 * modern PHP standards
-    * [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/) & [PSR-4](http://www.php-fig.org/psr/psr-4/)
+    * [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/), [PSR-3](http://www.php-fig.org/psr/psr-3/) & [PSR-4](http://www.php-fig.org/psr/psr-4/)
     * notice and warning free (find them, and I'll fix it!)
 * high-level usage (Plug & Play)
 * simplified client (auto login/logout, auto inject clTRID)
@@ -90,7 +90,6 @@ $epp_client = new EPPClient([
         'urn:ietf:params:xml:ns:domain-1.0',
         'urn:ietf:params:xml:ns:contact-1.0'
     ],
-    'debug' => true,
 ]);
 
 try {

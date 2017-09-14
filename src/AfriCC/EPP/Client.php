@@ -16,6 +16,7 @@ use AfriCC\EPP\Frame\Command\Logout as LogoutCommand;
 use AfriCC\EPP\Frame\Response as ResponseFrame;
 use AfriCC\EPP\Frame\ResponseFactory;
 use Exception;
+use Psr\Log\LoggerInterface;
 
 /**
  * A high level TCP (SSL) based client for the Extensible Provisioning Protocol (EPP)
@@ -25,19 +26,34 @@ use Exception;
 class Client
 {
     protected $socket;
+
     protected $host;
+
     protected $port;
+
     protected $username;
+
     protected $password;
+
     protected $services;
+
     protected $serviceExtensions;
+
     protected $ssl;
+
     protected $local_cert;
+
     protected $passphrase;
+
     protected $debug;
+
     protected $connect_timeout;
+
     protected $timeout;
+
     protected $chunk_size;
+
+    private $logger;
 
     public function __construct(array $config)
     {
@@ -83,6 +99,8 @@ class Client
             if (!empty($config['passphrase'])) {
                 $this->passphrase = $config['passphrase'];
             }
+
+            $this->ssl = true;
         }
 
         if (!empty($config['debug'])) {
@@ -113,6 +131,11 @@ class Client
     public function __destruct()
     {
         $this->close();
+    }
+
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 
     /**
@@ -312,8 +335,8 @@ class Client
 
             // If the buffer actually contains something then add it to the result
             if ($buffer !== false) {
-                if ($this->debug) {
-                    $this->log($buffer);
+                if ($this->logger) {
+                    $this->logger->debug($buffer);
                 }
 
                 $result .= $buffer;
