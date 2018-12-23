@@ -7,10 +7,9 @@
     "license": "GPL-3.0+",
     "authors": [
         {
-            "name": "Gunter Grodotzki",
+            "name": "AfriCC",
             "email": "hello@afri.cc",
-            "homepage": "https://www.afri.cc",
-            "role": "Developer"
+            "homepage": "https://afri.cc"
         }
     ],
     "require": {
